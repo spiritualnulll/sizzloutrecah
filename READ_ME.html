@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bot Configuration Documentation</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+        }
+        .container {
+            max-width: 800px;
+            margin: 2em auto;
+            padding: 1em;
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        h1, h2 {
+            color: #5865f2;
+        }
+        code {
+            background-color: #333;
+            padding: 2px 4px;
+            border-radius: 4px;
+            color: #0ff;
+        }
+        .warning {
+            color: #ed4245;
+            font-weight: bold;
+        }
+        .header {
+            text-align: center;
+            font-family: monospace;
+            font-size: 1.5em;
+            margin-top: 1em;
+            color: #0ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        ___(_)_______| | ___  ___  | | ___ | |<br>
+       / __| |_  /_  / |/ _ \/ __| | |/ _ \| |<br>
+       \__ \ |/ / / /| |  __/\__ \_| | (_) | |<br>
+       |___/_/___/___|_|\___||___(_)_|\___/|_|<br>
+    </div>
+    <div class="container">
+        <h1>Bot Configuration Documentation</h1>
+        <p>This page explains each configuration variable in the bot's <code>config.yaml</code> file and provides warnings or notes where applicable.</p>
+
+        <h2>DISCORD_TOKEN</h2>
+        <p><code>DISCORD_TOKEN</code> is the authentication key for your bot to connect with Discord's API.</p>
+        <p><span class="warning">Warning:</span> Never share this token. If leaked, revoke it immediately from the Discord Developer Portal and generate a new one.</p>
+
+        <h2>ALLOWED_SERVER_IDS</h2>
+        <p><code>ALLOWED_SERVER_IDS</code> is a list of server IDs where the bot is authorized to function. The bot will automatically leave any server not listed here.</p>
+        <p><span class="warning">Warning:</span> Ensure this list is accurate to avoid unintended disconnections.</p>
+
+        <h2>IMAGE_DIRECTORY</h2>
+        <p><code>IMAGE_DIRECTORY</code> specifies the directory where outreach-related images are stored. The default is <code>image</code>.</p>
+        <p>Ensure the directory exists and is writable to avoid errors.</p>
+
+        <h2>DATA_FILE</h2>
+        <p><code>DATA_FILE</code> is the JSON file where outreach data is saved. The default file is <code>outreach_data.json</code>.</p>
+        <p>Make backups regularly to prevent data loss if you want.</p>
+        <p><span class="warning">Warning:</span> This file gets big, so don't nuke it for that :P</p>
+
+        <h2>EMBED_COLOR</h2>
+        <p><code>EMBED_COLOR</code> determines the default color of the embeds in bot messages. The default is <code>#2f3136</code>, which matches Discord's dark mode theme.</p>
+
+        <h2>OWNER_IDS</h2>
+        <p><code>OWNER_IDS</code> is a list of user IDs that are granted elevated permissions for bot management, irrespective of their roles.</p>
+        <p><span class="warning">Warning:</span> Only include trusted users here to prevent misuse.</p>
+
+        <h2>INTERGRITY_SIGNOFF</h2>
+        <p><code>INTERGRITY_SIGNOFF</code> is a hash key used for verification and encryption tasks, ensuring secure operations within the bot.</p>
+        <p><span class="warning">Warning:</span> Treat this key like a password—keep it secure and never share it.</p>
+        </ul>
+    </div>
+</body>
+</html>

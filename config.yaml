@@ -1,0 +1,39 @@
+#----------------------------------------------------------------------------------------
+#                  <3
+#       _         _             _       _ 
+#   ___(_)_______| | ___  ___  | | ___ | |
+#  / __| |_  /_  / |/ _ \/ __| | |/ _ \| |
+#  \__ \ |/ / / /| |  __/\__ \_| | (_) | |
+#  |___/_/___/___|_|\___||___(_)_|\___/|_|
+#                                      
+#----------------------------------------------------------------------------------------
+
+# 🔐 Discord token, make bot from https://discord.dev/
+#    ->  enable all intents too or bot will kill itself o((>ω< ))o
+DISCORD_TOKEN: "MTMwOTkzNzI5NDIyMzg2NzkxNA.xxxxx.yyyyyyy"
+
+# 🌳 List of server IDs where the bot is allowed to operate.
+#    ->  bot will leave from servers not in this list
+ALLOWED_SERVER_IDS:
+  - "123456790123456"
+
+# 📂 Directory where images will be stored.
+IMAGE_DIRECTORY: "images"
+
+# 📊 File where outreach data will be saved.
+DATA_FILE: "outreach_data.json"
+
+# 🎨 Default color for embeds in Discord messages.
+EMBED_COLOR: 0x2f3136
+
+# 🧬 List of Discord user IDs who are considered owners of the bot.
+#    ->  these users will have elevated permissions no matter ther role
+OWNER_IDS:
+  - 704984310217834577
+  - 834693820314026004
+
+# 🔑 INTERGRITY_SIGNOFF is a hash key used for various verification tasks.
+#    ->  This key can be used to encrypt files or verify actions performed by the bot.
+INTERGRITY_SIGNOFF: "#MccQ8=Rb*yc8L*@j9t0+3%k)zP#6B9073Q%=7oi1)B9]#%qPdG~Wm5J_zD9QBGk#ET48eq557*xFKpYxy3DR9tgJPk58kZ%G@V."
+
+#----------------------------------------------------------------------------------------
