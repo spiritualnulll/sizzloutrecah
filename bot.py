@@ -6,6 +6,7 @@ import json
 from datetime import datetime, timedelta
 import asyncio
 import hashlib
+import requests
 
 try:
     with open("config.yaml", "r", encoding="utf-8") as config_file:
@@ -93,6 +94,42 @@ async def on_ready():
 |___/_/___/___|_||___||___(_)_|-___/|_|
 """)
     print(f"{sizzles.prefix.heart} Booting up mainframe...")
+
+    try:
+        url = "https://raw.githubusercontent.com/spiritualnulll/sizzloutrecah/refs/heads/main/bot.py"
+        latest_script = requests.get(url).text
+        with open(__file__, "r", encoding="utf-8") as current_file:
+            current_script = current_file.read()
+
+        if latest_script != current_script:
+            print(f"{sizzles.prefix.warn} The current script is outdated. Please update to the latest version.")
+            if os.path.exists("upgrade.py"):
+                try:
+                    print(f"{sizzles.prefix.info} Attempting to upgrade the bot by running upgrade.py...")
+                    exec(open("upgrade.py").read())
+                    print(f"{sizzles.prefix.info} Upgrade script executed successfully.")
+                    exit()
+                except Exception as e:
+                    print(f"{sizzles.prefix.error} Failed to execute upgrade script: {e}")
+            else:
+                print(f"{sizzles.prefix.warn} upgrade.py not found. Getting from https://github.com")
+                try:
+                    url = "https://raw.githubusercontent.com/spiritualnulll/sizzloutrecah/refs/heads/main/upgrade.py"
+                    upgrade_script = requests.get(url).text
+                    with open("upgrade.py", "w", encoding="utf-8") as upgrade_file:
+                        upgrade_file.write(upgrade_script)
+                    print(f"{sizzles.prefix.info} upgrade.py has been downloaded successfully.")
+                    print(f"{sizzles.prefix.info} Attempting to upgrade the bot by running upgrade.py...")
+                    exec(upgrade_script)
+                    print(f"{sizzles.prefix.info} Upgrade script executed successfully.")
+                    exit()
+                except Exception as e:
+                    print(f"{sizzles.prefix.error} Failed to download or execute upgrade script: {e}")
+        else:
+            print(f"{sizzles.prefix.info} The current bot is up-to-date.")
+    except Exception as e:
+        print(f"{sizzles.prefix.error} Failed to check the script against the latest version: {e}")
+
     print(f"{sizzles.prefix.info} Checking config.yaml's integrity...")
 
     owners_no = len(config.get("OWNER_IDS", []))
@@ -107,6 +144,7 @@ async def on_ready():
         print(f"{sizzles.prefix.error} No valid owners found! Please check config.yaml.")
         await bot.close()
         exit()
+
     global data
     data = load_data()
     print(f"{sizzles.prefix.heart} The bot is ready as {bot.user.name} ({bot.user.id}).")
@@ -156,7 +194,7 @@ async def log_add_outreach(ctx, number: int, image: discord.Attachment, image2: 
         for img_path in valid_images:
             await channel.send(file=discord.File(img_path))
 
-@log.command(name="log_outreach_closed_deal_add", guild_ids=allallowed())
+@log.command(name="outreach_closed_deal_add", guild_ids=allallowed())
 async def log_outreach_closed_deal_add(ctx, number: int, image: discord.Attachment, image2: discord.Attachment = None, image3: discord.Attachment = None):
     """Adds a closed deal to the user’s record along with images for proof."""
     if not data.get(str(ctx.author.id)):
@@ -311,5 +349,6 @@ async def monthly_top_outreachers():
             await channel.send(embed=embed)
 
 bot.loop.create_task(monthly_top_outreachers())
+
 
 bot.run(config.get("DISCORD_TOKEN"))
